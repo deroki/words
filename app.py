@@ -12,13 +12,17 @@ def sigterm_handler(signal, frame):
 signal.signal(signal.SIGTERM, sigterm_handler)
 DURACION = 60
 
+
 def random_word(length):
+    '''devuelve palabras con numero y letra'''
     word = string.ascii_letters + string.digits
     return ''.join(random.choice(word) for i in range(length))
 
     
 
 def add_word(star_time, word_dict):
+    '''proceso que añade palabras al diccionario compartido entre procesos 
+    durante un tiempo'''
     diff_time = 0
 
     while(diff_time < DURACION):
@@ -58,6 +62,7 @@ if __name__ == '__main__':
             reetidos =+ 1
         
     diferentes = elementos - repetidos
+    
     ''' salvar '''
     with open(pickefile, 'wb') as f:
         pickle.dump(word_dict,f)
