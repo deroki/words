@@ -4,7 +4,12 @@ import string
 import multiprocessing as mp
 import pprint
 import pickle
+import signal
 
+def sigterm_handler(signal, frame):
+    print("guardando logs y otras cosas")
+
+signal.signal(signal.SIGTERM, sigterm_handler)
 DURACION = 60
 
 def random_word(length):
@@ -31,9 +36,12 @@ def add_word(star_time, word_dict):
 
 
 if __name__ == '__main__':
+
+
     start_time = time.time()
     manager = mp.Manager()
     word_dict = manager.dict()
+
     N_PROCESSES = 3
 
     pool = mp.Pool(N_PROCESSES)
